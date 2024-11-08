@@ -17,6 +17,9 @@ import Read from './components/Read';
 function App() {
   // displays a navigation bar that changes the component displayed based on the route
   // Route tag defines elements / Components to show
+
+  
+
   return (
     <Router>
       <NavigationBar />
