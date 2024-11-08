@@ -9,6 +9,20 @@ const app = express();
 
 const port = 4000; // port for website
 
+const cors = require('cors');
+app.use(cors());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 /*
     The bodyParser allows for access to the body of a post.
     This is necessary because unlike the get method, data
@@ -56,6 +70,11 @@ app.get("/api/movies", (req, res) => {
           "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
         }
       ];
+
+      app.post("/api/movies", (req, res) => {
+        res.send("Movie added!")
+      });
+
     // status ok
     res.status(200).json({ myMovies: movies });
 

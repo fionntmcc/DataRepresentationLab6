@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 // Reusable read component
 const Create = () => {
@@ -19,13 +20,21 @@ const Create = () => {
   const [year, setYear] = useState("");
   const [poster, setPoster] = useState("");
 
-  // Log input values to console
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(title);
-    console.log(year);
-    console.log(poster);
-  }
+const handleSubmit = (e) => {
+  e.preventDefault();
+  
+  console.log(`Title: ${title}, Year: ${year}, Poster: ${poster}`);
+  
+  const movie = {
+    title: title,
+    year: year,
+    poster: poster
+  };
+  
+  axios.post('http://localhost:4000/api/movies', movie)
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err.data));
+};
 
   return(
     <div>
