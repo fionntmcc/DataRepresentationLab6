@@ -12,6 +12,10 @@ const port = 4000; // port for website
 const cors = require('cors');
 app.use(cors());
 
+/* 
+    cors is a middleware that defines what a ips are allowed to communicate
+    with the server. Protects against DOS attacks, etc.
+*/
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -19,6 +23,11 @@ app.use(function(req, res, next) {
   next();
 });
 
+/*
+    In post http requests, the data is returned in the body of the response.
+    BodyParser allows for us to parse the returned data easily,
+    in json in this case
+*/
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -71,6 +80,7 @@ app.get("/api/movies", (req, res) => {
         }
       ];
 
+      // post response to client about added movie
       app.post("/api/movies", (req, res) => {
         res.send("Movie added!")
       });

@@ -20,6 +20,7 @@ const Create = () => {
   const [year, setYear] = useState("");
   const [poster, setPoster] = useState("");
 
+  // handle botton click, log movie details and post movie to server
 const handleSubmit = (e) => {
   e.preventDefault();
   
@@ -31,6 +32,7 @@ const handleSubmit = (e) => {
     poster: poster
   };
   
+  // Post created movie to server, retrieve response from server
   axios.post('http://localhost:4000/api/movies', movie)
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err.data));
